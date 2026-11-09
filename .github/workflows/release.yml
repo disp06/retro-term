@@ -1,10 +1,15 @@
 name: Release
 
-# Push a tag like v1.2.3 -> builds the APK and publishes a GitHub Release
-# with the notes from .github/release-notes/<tag>.md
+# When the release notes (or this workflow) change on main, build the APK and publish
+# GitHub Release v<versionName> with the notes from .github/release-notes/v<versionName>.md.
+# To ship a new version: bump versionName in app/build.gradle.kts, add the matching notes file, push.
 on:
   push:
-    tags: [ 'v*' ]
+    branches: [ main ]
+    paths:
+      - '.github/release-notes/**'
+      - '.github/workflows/release.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -14,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Read version
+        id: ver
+        run: echo "v=$(grep -oP 'versionName = "\K[^"]+' app/build.gradle.kts)" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -22,9 +30,12 @@ jobs:
       - name: Build release APK
         run: ./gradlew assembleRelease --no-daemon
       - name: Rename APK
-        run: cp app/build/outputs/apk/release/app-release.apk "RetroTerm-${GITHUB_REF_NAME#v}.apk"
+        run: cp app/build/outputs/apk/release/app-release.apk "RetroTerm-${{ steps.ver.outputs.v }}.apk"
       - uses: softprops/action-gh-release@v2
         with:
-          name: RETRO-TERM ${{ github.ref_name }}
-          body_path: .github/release-notes/${{ github.ref_name }}.md
-          files: RetroTerm-*.apk
+          tag_name: v${{ steps.ver.outputs.v }}
+          target_commitish: ${{ github.sha }}
+          name: RETRO-TERM ${{ steps.ver.outputs.v }}
+          body_path: .github/release-notes/v${{ steps.ver.outputs.v }}.md
+          files: RetroTerm-${{ steps.ver.outputs.v }}.apk
+          make_latest: true
