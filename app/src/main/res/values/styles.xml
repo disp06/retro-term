@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base: pixel font on every TextView; swipe right closes screens back to the watch face -->
+    <style name="Theme.RetroTerm" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowSwipeToDismiss">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowShowWallpaper">false</item>
+        <item name="android:fontFamily">@font/monocraft</item>
+        <item name="android:textViewStyle">@style/TermText</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- DAY: Amber CRT -->
+    <style name="Theme.RetroTerm.Day">
+        <item name="termBg">@color/day_bg</item>
+        <item name="termFg">@color/day_fg</item>
+        <item name="termNight">false</item>
+        <item name="android:windowBackground">@color/day_bg</item>
+        <item name="android:textColorPrimary">@color/day_fg</item>
+        <item name="android:colorBackground">@color/day_bg</item>
+    </style>
+
+    <!-- NIGHT: Green phosphor -->
+    <style name="Theme.RetroTerm.Night">
+        <item name="termBg">@color/night_bg</item>
+        <item name="termFg">@color/night_fg</item>
+        <item name="termNight">true</item>
+        <item name="android:windowBackground">@color/night_bg</item>
+        <item name="android:textColorPrimary">@color/night_fg</item>
+        <item name="android:colorBackground">@color/night_bg</item>
+    </style>
+
+    <style name="TermText" parent="@android:style/Widget.TextView">
+        <item name="android:fontFamily">@font/monocraft</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">?attr/termFg</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+</resources>

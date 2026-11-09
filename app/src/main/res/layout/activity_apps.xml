@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- [ APP INDEX ]: terminal list + static chrome + CRT glass. Geometry is set in code on a 454 grid. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/termBg">
+
+    <androidx.wear.widget.WearableRecyclerView
+        android:id="@+id/app_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+
+    <com.disp06.retroterm.ui.DrawerChromeView
+        android:id="@+id/drawer_chrome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/drawer_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:singleLine="true"
+        android:text="@string/drawer_title" />
+
+    <TextView
+        android:id="@+id/drawer_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="000/000" />
+
+    <com.disp06.retroterm.ui.CrtOverlayView
+        android:id="@+id/crt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

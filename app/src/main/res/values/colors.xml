@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DAY: Amber CRT -->
+    <color name="day_bg">#FFB000</color>
+    <color name="day_fg">#111111</color>
+
+    <!-- NIGHT: Green phosphor -->
+    <color name="night_bg">#000000</color>
+    <color name="night_fg">#39FF14</color>
+
+    <!-- AMBIENT (always-on): black background, dimmed phosphor to limit burn-in -->
+    <color name="ambient_bg">#000000</color>
+    <color name="ambient_night_fg">#1E9E0A</color>
+    <color name="ambient_day_fg">#B07800</color>
+</resources>

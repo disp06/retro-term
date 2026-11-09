@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RETRO-TERM</string>
+    <string name="info_name">RETRO-INFO</string>
+    <string name="drawer_title">[ APP INDEX ]</string>
+    <string name="launch_failed">LAUNCH FAILED</string>
+</resources>

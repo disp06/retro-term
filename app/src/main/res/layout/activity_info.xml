@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- INFO screen: three full-screen pages (WEATHER / BLUETOOTH / QUICK START), snap-scrolled vertically -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/termBg">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+
+    <com.disp06.retroterm.ui.CrtOverlayView
+        android:id="@+id/crt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>
