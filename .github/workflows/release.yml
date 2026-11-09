@@ -1,0 +1,30 @@
+name: Release
+
+# Push a tag like v1.2.3 -> builds the APK and publishes a GitHub Release
+# with the notes from .github/release-notes/<tag>.md
+on:
+  push:
+    tags: [ 'v*' ]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build release APK
+        run: ./gradlew assembleRelease --no-daemon
+      - name: Rename APK
+        run: cp app/build/outputs/apk/release/app-release.apk "RetroTerm-${GITHUB_REF_NAME#v}.apk"
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: RETRO-TERM ${{ github.ref_name }}
+          body_path: .github/release-notes/${{ github.ref_name }}.md
+          files: RetroTerm-*.apk
